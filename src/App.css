@@ -1,0 +1,9 @@
+.body {
+  margin: 0;
+  font-family: sans-serif;
+  background-color: #282c34; /* or any color */
+}
+.App {
+  text-align: center;
+  background-color: #282c34;
+}
