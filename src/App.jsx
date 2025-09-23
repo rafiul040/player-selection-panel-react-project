@@ -1,5 +1,5 @@
 import './App.css'
-
+import { ToastContainer } from 'react-toastify'
 import Navbar from './components/Navbar/Navbar'
 import AvailablePlayers from './components/Available Players/AvailablePlayers'
 import SelectedPlayers from './components/selectedPlayers/SelectedPlayers'
@@ -14,9 +14,15 @@ import { Suspense, useState } from 'react'
   const playerPromise = fetchPlayers()
 function App() {
   const [toggle, setToggle] = useState(true)
-  const [availableBalance, setAvailableBalance] = useState(60000000)
+  const [availableBalance, setAvailableBalance] = useState(600000)
   const [purchasedPlayers, setPurchasedPlayers] = useState([])
 
+
+  const removePlayer = (p) => {
+    const filterData = purchasedPlayers.filter(ply => ply.player_name !==p.player_name)
+    setPurchasedPlayers(filterData)
+    setAvailableBalance(availableBalance +parseInt(p.price.split("USD").join("").split(",").join("")))
+  }
 
 
 
@@ -49,7 +55,7 @@ function App() {
     }>
     <AvailablePlayers purchasedPlayers={purchasedPlayers} setPurchasedPlayers={setPurchasedPlayers} availableBalance={availableBalance} setAvailableBalance={setAvailableBalance} playerPromise={playerPromise}></AvailablePlayers>
 
-    </Suspense> : <SelectedPlayers purchasedPlayers={purchasedPlayers}></SelectedPlayers>
+    </Suspense> : <SelectedPlayers removePlayer={removePlayer} purchasedPlayers={purchasedPlayers}></SelectedPlayers>
     }
 
 
@@ -60,7 +66,7 @@ function App() {
     </div>
 
 
-    
+      <ToastContainer/>
       </div>
   )
 }

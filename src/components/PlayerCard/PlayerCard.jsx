@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import userImg from '../../assets/user 1.png'
 import flagImg from '../../assets/report 1.png'
+import { toast } from 'react-toastify';
 const PlayerCard = ({ player, setAvailableBalance, availableBalance, setPurchasedPlayers, purchasedPlayers }) => {
 
     const [isSelected, setIsSelected] = useState(false)
@@ -8,7 +9,7 @@ const PlayerCard = ({ player, setAvailableBalance, availableBalance, setPurchase
     const handleSelected = (playerData) => {
         const playerPrice = parseInt(playerData.price.split("USD").join("").split(",").join(""))
         if(availableBalance < playerPrice){
-            alert("Not Enough Points")
+            toast("Not Enough Points")
             return
         }
         setIsSelected(true)
