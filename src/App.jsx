@@ -14,7 +14,8 @@ import { Suspense, useState } from 'react'
   const playerPromise = fetchPlayers()
 function App() {
   const [toggle, setToggle] = useState(true)
-  const [availableBalance, setAvailableBalance] = useState(600000)
+  const [availableBalance, setAvailableBalance] = useState(60000000)
+  const [purchasedPlayers, setPurchasedPlayers] = useState([])
 
 
 
@@ -31,13 +32,14 @@ function App() {
     <Navbar availableBalance={availableBalance}></Navbar>
 
     <div className='max-w-[1200px] mx-auto flex justify-between items-center'>
-    <h1 className='font-bold text-2xl'>Available Players</h1>
+    <h1 className='font-bold text-2xl'>
+      {toggle === true ? "Available Players" : `Selected Player (${purchasedPlayers.length}/6)`}
+    </h1>
 
 
     <div className='bg-white'>
       <button onClick={() => setToggle(true)} className={`py-3 cursor-pointer px-5 border-1 border-r-0 border-gray-400 font-semibold rounded-l-2xl ${toggle === true? "bg-[#e7fe29]" : ""}`}>Available</button>
-      <button onClick={() => setToggle(false)} className={`py-3 cursor-pointer px-5 border-1 border-l-0 border-gray-400 font-semibold rounded-r-2xl ${toggle === false? "bg-[#e7fe29]" : ""}`}>Selected <span>(0)</span></button>
-      {/* <button onClick={() => setToggle(false)} className={`py-3 cursor-pointer font-semibold text-gray-600 px-5 border-1 border-l-0 rounded-r-xl border-gray-400 bg-white ${toggle === false? "bg-[#e7e78a]" : "" }`}>Selected <span>(0)</span></button> */}
+      <button onClick={() => setToggle(false)} className={`py-3 cursor-pointer px-5 border-1 border-l-0 border-gray-400 font-semibold rounded-r-2xl ${toggle === false? "bg-[#e7fe29]" : ""}`}>Selected <span>({purchasedPlayers.length})</span></button>
     </div>
     </div>
 
@@ -45,9 +47,9 @@ function App() {
     {
       toggle === true ? <Suspense fallback={<span className="loading loading-dots loading-xl"></span>
     }>
-    <AvailablePlayers availableBalance={availableBalance} setAvailableBalance={setAvailableBalance} playerPromise={playerPromise}></AvailablePlayers>
+    <AvailablePlayers purchasedPlayers={purchasedPlayers} setPurchasedPlayers={setPurchasedPlayers} availableBalance={availableBalance} setAvailableBalance={setAvailableBalance} playerPromise={playerPromise}></AvailablePlayers>
 
-    </Suspense> : <SelectedPlayers></SelectedPlayers>
+    </Suspense> : <SelectedPlayers purchasedPlayers={purchasedPlayers}></SelectedPlayers>
     }
 
 
