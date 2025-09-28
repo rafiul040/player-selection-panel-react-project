@@ -57,7 +57,7 @@ const PlayerCard = ({ player, setAvailableBalance, availableBalance, setPurchase
        
            <div className='flex justify-between mt-2'>
                <h2 className='text-sm font-semibold'>Price: $<span>{player.price}</span></h2>
-               {/* <h2 className='py-2 px-2 font-semibold rounded-md border-1 bg-white text-gray-600 border-gray-200'>Choose Player</h2> */}
+
                <h2 onClick={() => {handleSelected(player)}} className='text-sm mr-2 border-1 border-gray-200 cursor-pointer rounded-md px-2 text-gray-600 font-semibold'>{isSelected === true? "Selected" : "Choose Player"}</h2>
            </div>
        
