@@ -14,7 +14,7 @@ import { Suspense, useState } from 'react'
   const playerPromise = fetchPlayers()
 function App() {
   const [toggle, setToggle] = useState(true)
-  const [availableBalance, setAvailableBalance] = useState(600000)
+  const [availableBalance, setAvailableBalance] = useState(60000000)
   const [purchasedPlayers, setPurchasedPlayers] = useState([])
 
 
