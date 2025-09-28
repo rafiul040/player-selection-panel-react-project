@@ -23,7 +23,7 @@ const PlayerCard = ({ player, setAvailableBalance, availableBalance, setPurchase
     };
 
 
-
+// selection panel
     return (
        <div class="card bg-white-100 shadow-sm p-4">
        
